@@ -1,0 +1,15 @@
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 50%;
+
+    .input {
+        order: 2;
+        flex-grow: 3;
+    }
+
+    .icon {
+        order: 1;
+    }
+}
