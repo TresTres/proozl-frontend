@@ -22,7 +22,7 @@ class SearchGrid extends Component {
     baseURL: string = environment.baseURL;
 
     handleTextChange = (inp: any) => {
-    
+        
         this.setState({
             [inp.target.name]: inp.target.value
         })
@@ -56,6 +56,10 @@ class SearchGrid extends Component {
         
     };
     
+    //@ts-ignore
+    shouldComponentUpdate( nextProps, nextState: any) {
+        return nextState.results !== this.state.results;
+    }
 
 
     render () {

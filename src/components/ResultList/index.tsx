@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-const ResultList = (props: any) => (
+import Grid from '@material-ui/core/Grid';
 
-    <ul>
-        {props.results.map((entry: any) => (
-            <div>
-                {entry.title}
+import ResultEntry from '../ResultEntry';
+
+import './ResultList.scss';
+
+declare var MathJax: any;
+
+class ResultList extends Component<any> {
+
+
+    componentDidUpdate(){
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, ReactDOM.findDOMNode(this)]);
+    }
+
+
+    render() {
+        return (
+            <div className="result-area">
+                <Grid container spacing={4} justify="flex-start">
+                    {this.props.results.map((entry: any) => (
+                        <ResultEntry entryInfo={entry} />
+                    ))} 
+                </Grid>
             </div>
-        ))}
-    </ul>
-);
+        );
+    }
+}
 
 export default ResultList;

@@ -1,3 +1,4 @@
+
 export const fetchRequest = (requestBody: any, url: string) => {
 	return fetch(url , {
 		method: 'POST',
@@ -7,4 +8,5 @@ export const fetchRequest = (requestBody: any, url: string) => {
 		},
 	});
 };
+
 

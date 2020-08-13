@@ -1,0 +1,20 @@
+.result-item {
+    height: 40%;
+
+}
+
+.result-card {
+    min-width: 100%;
+    min-height: 100%;
+
+}
+
+.result-summary {
+    font-size: .8em;
+    height: 20%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+}
