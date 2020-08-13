@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 
 import SearchBar from '../../components/SearchBar';
-import ResultList from '../../components/ResultList';
+import ContentGrid from '../ContentGrid';
 
 import { fetchRequest } from '../../utils/apihelper';
 import { environment } from '../../environment';
 
 import './SearchGrid.scss'
+import { resolve } from 'path';
 
 class SearchGrid extends Component {
 
     state = {
         query: '',
         results: [],
-        analyses: {} 
+        analyses: {},
+        isLoading: false 
     };
     
     baseURL: string = environment.baseURL;
@@ -28,7 +31,7 @@ class SearchGrid extends Component {
         })
     };
 
-    searchArxiv = (event: any) => {
+    searchArxiv = async (event: any) => {
 
         event.preventDefault();
         const eventBody: object  = {
@@ -36,50 +39,79 @@ class SearchGrid extends Component {
             max_results: 50,
             start: 0
         };
+
         
-        
-        fetchRequest(eventBody, this.baseURL + 'search')
-            .then((res: any) => {
-			    if (res.status !== 200) {
-				    throw new Error('Failed');
-			    }
-			    return res.json();
-		    })
-            .then((resbody: any) => {
-                this.setState({
-                    results: JSON.parse(resbody.body)
-                })
-            })
-            .catch((err: any) => {
-                console.log(err);
+        const responseParse = async (res: Response) => {
+            if (res.status !== 200) {
+                throw new Error('Failed');
+            }
+            return res.json();
+        } 
+
+        const wait = () => {
+            return new Promise((resolve) => 
+                setTimeout(() => resolve(), 2000)
+            ); 
+        }
+
+        try {
+            
+            this.setState({
+                isLoading: true
             });
-        
+            const searchData : any = await fetchRequest(eventBody, this.baseURL + 'search')
+                .then((res: Response) => responseParse(res));
+            this.setState({
+                results: JSON.parse(searchData.body)
+            });  
+
+            await wait();
+            const analyzeData = await fetchRequest(eventBody, this.baseURL + 'analyze')
+                .then((res: Response) => responseParse(res));
+            this.setState({
+                analyses: JSON.parse(analyzeData.body),
+                isLoading: false
+            }); 
+                    
+
+        } catch(err) {
+            console.log(err);
+        }
     };
     
     //@ts-ignore
     shouldComponentUpdate( nextProps, nextState: any) {
-        return nextState.results !== this.state.results;
+        return  (nextState.isLoading !== this.state.isLoading) || 
+            (nextState.results !== this.state.results);
     }
 
 
     render () {
+
         return (
-            <div className="search-content"> 
-                <div className="site-title">
+            <Grid 
+                container
+                spacing={5}
+                direction="column"
+                className="search-content"> 
+                
+                <Grid item className="site-title">
                     <Typography gutterBottom>
                         <Box letterSpacing=".25em" fontSize="8em">
                             Proozl
                         </Box>
                     </Typography>
-                </div>
-                <SearchBar 
-                    onSubmit={this.searchArxiv.bind(this)}
-                    onTextChange={this.handleTextChange.bind(this)}
-                />
-                <ResultList
-                    results={this.state.results}
-                />
-            </div>
+                </Grid>
+                <Grid item>
+                    <SearchBar 
+                        onSubmit={this.searchArxiv.bind(this)}
+                        onTextChange={this.handleTextChange.bind(this)}
+                    />
+                </Grid>
+                <Grid item>
+                    <ContentGrid {...this.state} />
+                </Grid>
+            </Grid>
         );
     }
 };

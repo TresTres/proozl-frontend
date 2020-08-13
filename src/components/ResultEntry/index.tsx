@@ -13,7 +13,6 @@ import './ResultEntry.scss';
 class ResultEntry extends Component<any> {
 
 
-
     render() {
         return (
             <Grid item xs={4} className="result-item">
