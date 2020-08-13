@@ -11,7 +11,6 @@ import { fetchRequest } from '../../utils/apihelper';
 import { environment } from '../../environment';
 
 import './SearchGrid.scss'
-import { resolve } from 'path';
 
 class SearchGrid extends Component {
 
@@ -48,9 +47,9 @@ class SearchGrid extends Component {
             return res.json();
         } 
 
-        const wait = () => {
-            return new Promise((resolve) => 
-                setTimeout(() => resolve(), 2000)
+        const wait = (ms: number) => {
+            return new Promise((resolve: Function) => 
+                setTimeout(resolve(), ms)
             ); 
         }
 
@@ -64,9 +63,8 @@ class SearchGrid extends Component {
             this.setState({
                 results: JSON.parse(searchData.body)
             });  
-
-            await wait();
-            const analyzeData = await fetchRequest(eventBody, this.baseURL + 'analyze')
+            const analyzeData: any = await wait(2000)
+                .then(() => fetchRequest(eventBody, this.baseURL + 'analyze'))
                 .then((res: Response) => responseParse(res));
             this.setState({
                 analyses: JSON.parse(analyzeData.body),
@@ -93,7 +91,8 @@ class SearchGrid extends Component {
                 container
                 spacing={5}
                 direction="column"
-                className="search-content"> 
+                className="search-content"
+                style = {{ width: "100%" }}> 
                 
                 <Grid item className="site-title">
                     <Typography gutterBottom>
