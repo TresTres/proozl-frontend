@@ -49,7 +49,7 @@ class SearchGrid extends Component {
 
         const wait = (ms: number) => {
             return new Promise((resolve: Function) => 
-                setTimeout(resolve(), ms)
+                setTimeout(() => resolve(), ms)
             ); 
         }
 
