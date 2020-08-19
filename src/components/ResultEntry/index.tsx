@@ -12,16 +12,19 @@ import './ResultEntry.scss';
 class ResultEntry extends Component<any> {
 
 
+
     render() {
+
+        const pdfLink = this.props.entryInfo.links[1].href
         return (
-            <Grid item xs={4} className="result-item">
+            <Grid item lg={6} className="result-item">
                 <Card 
                     variant="outlined" 
                     className="result-card"
                     style={{ backgroundColor: "#78909c", color: "whitesmoke"}}>
                     <CardActionArea 
                         component="a" 
-                        href={this.props.entryInfo.link}
+                        href={pdfLink}
                         target="_blank">
                         <CardContent>
                             <Typography 
@@ -34,7 +37,7 @@ class ResultEntry extends Component<any> {
                             <Typography 
                                 component="p"  
                                 className="result-summary">
-                                    {this.props.entryInfo.abstract}
+                                    {this.props.entryInfo.summary}
                             </Typography>
                         </CardContent>
                     </CardActionArea>

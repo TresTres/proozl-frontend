@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 import SearchBar from '../../components/SearchBar';
 import ContentGrid from '../ContentGrid';
@@ -87,30 +88,30 @@ class SearchGrid extends Component {
     render () {
 
         return (
-            <Grid 
-                container
-                spacing={5}
-                direction="column"
-                className="search-content"
-                style = {{ width: "100%" }}> 
-                
-                <Grid item className="site-title">
-                    <Typography gutterBottom>
-                        <Box letterSpacing=".25em" fontSize="8em">
-                            Proozl
-                        </Box>
-                    </Typography>
+            <Container> 
+                <Grid 
+                    container
+                    spacing={5}
+                    direction="column"
+                    className="search-content"
+                    style = {{ width: "100%" }}> 
+                    
+                    <Grid item className="site-title">
+                        <Typography gutterBottom>
+                            <Box letterSpacing=".25em" fontSize="8em">
+                                Proozl
+                            </Box>
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <SearchBar 
+                            onSubmit={this.searchArxiv.bind(this)}
+                            onTextChange={this.handleTextChange.bind(this)}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid item>
-                    <SearchBar 
-                        onSubmit={this.searchArxiv.bind(this)}
-                        onTextChange={this.handleTextChange.bind(this)}
-                    />
-                </Grid>
-                <Grid item>
-                    <ContentGrid {...this.state} />
-                </Grid>
-            </Grid>
+                <ContentGrid {...this.state} />
+            </Container>
         );
     }
 };

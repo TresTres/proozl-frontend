@@ -11,20 +11,23 @@ const ContentGrid = (props: any) => (
 
     <Grid 
         container 
-        spacing={5}
-        direction="column" 
+        spacing={2}
+        direction="row" 
         className="content-grid">
         
-        <Grid item>
-            {props.isLoading && "Loading..."}
-            <WordCloud
-                rankings = {props.analyses.word_rankings}/>
-        </Grid>
         <Grid item>
             {props.isLoading && "Loading..."}
             <ResultList 
                 results = {props.results}/>
         </Grid>
+        <Grid item>
+            {props.isLoading && "Loading..."}
+            <WordCloud
+                rankings = {props.analyses.word_rankings}/>
+        </Grid>
+
+
+
     </Grid>
 );
 

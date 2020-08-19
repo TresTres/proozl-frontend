@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import ReactWordcloud from 'react-wordcloud';
 
+import Box from '@material-ui/core/Box';
 
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/animations/scale.css';
+
+import './WordCloud.scss';
 
 class WordCloud extends Component<any> {
     render() {
@@ -22,16 +25,19 @@ class WordCloud extends Component<any> {
         }
 
         return(
-            <ReactWordcloud 
-                options = {{
-                    scale: 'linear',
-                    spiral: 'archimedean',
-                    fontSizes: [48,72],
-                    rotations: 5,
-                    rotationAngles: [-45,45]
+            <Box className="wordcloud">
+                <ReactWordcloud 
+                    options = {{
+                        scale: 'linear',
+                        spiral: 'archimedean',
+                        fontSizes: [48,72],
+                        rotations: 5,
+                        rotationAngles: [-45,45]
 
-                }}
-                words = {output}/>);
+                    }}
+                    words = {output}/>
+            </Box>
+            );
     }
 };
 

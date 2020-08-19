@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 import ResultEntry from '../ResultEntry';
 
@@ -19,13 +20,13 @@ class ResultList extends Component<any> {
 
     render() {
         return (
-            <div className="result-area">
-                <Grid container spacing={4} justify="flex-start">
+            <Box className="result-area">
+                <Grid container spacing={2} justify="flex-start">
                     {this.props.results.map((entry: any) => (
                         <ResultEntry entryInfo={entry} />
                     ))} 
                 </Grid>
-            </div>
+            </Box>
         );
     }
 }
