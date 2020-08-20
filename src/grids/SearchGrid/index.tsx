@@ -88,13 +88,13 @@ class SearchGrid extends Component {
     render () {
 
         return (
-            <Container> 
+            <Container className="search-content" maxWidth="xl"> 
                 <Grid 
                     container
                     spacing={5}
                     direction="column"
-                    className="search-content"
-                    style = {{ width: "100%" }}> 
+                    style = {{ width: "90%" }}
+                    className="search-grid"> 
                     
                     <Grid item className="site-title">
                         <Typography gutterBottom>

@@ -30,7 +30,7 @@ class WordCloud extends Component<any> {
                     options = {{
                         scale: 'linear',
                         spiral: 'archimedean',
-                        fontSizes: [48,72],
+                        fontSizes: [32,42],
                         rotations: 5,
                         rotationAngles: [-45,45]
 

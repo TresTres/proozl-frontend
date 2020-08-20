@@ -17,11 +17,11 @@ class ResultEntry extends Component<any> {
 
         const pdfLink = this.props.entryInfo.links[1].href
         return (
-            <Grid item lg={6} className="result-item">
+            <Grid item lg={12} className="result-item">
                 <Card 
                     variant="outlined" 
                     className="result-card"
-                    style={{ backgroundColor: "#78909c", color: "whitesmoke"}}>
+                    style={{ backgroundColor: "#222222", color: "whitesmoke"}}>
                     <CardActionArea 
                         component="a" 
                         href={pdfLink}
