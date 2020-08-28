@@ -1,11 +1,16 @@
 .result-area {
     overflow-y: auto;
-    height: 42vh;
+    height: 44vh;
 }
 .result-pagination {
     width: 50%;
-    margin: auto;
-    margin-top: 2%;
+    margin: 2% auto 2% auto;
+
+
+    .MuiPagination-ul {
+        width: fit-content;
+        margin: auto;
+    }
 
     .MuiPaginationItem-root {
         color: whitesmoke;
