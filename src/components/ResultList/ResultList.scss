@@ -1,5 +1,18 @@
 .result-area {
     overflow-y: auto;
-    height: 49vh;
+    height: 42vh;
+}
+.result-pagination {
+    width: 50%;
+    margin: auto;
+    margin-top: 2%;
+
+    .MuiPaginationItem-root {
+        color: whitesmoke;
+        
+    }
+    .MuiPaginationItem-page.Mui-selected, .MuiPaginationItem-page.Mui-selected:hover {
+        background-color: gray
+    }
 }
 

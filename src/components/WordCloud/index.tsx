@@ -9,6 +9,12 @@ import 'tippy.js/animations/scale.css';
 import './WordCloud.scss';
 
 class WordCloud extends Component<any> {
+
+    //@ts-ignore
+    shouldComponentUpdate( nextProps: any, _nextState: any) {
+        return  (nextProps.rankings !== this.props.rankings);
+    }
+
     render() {
 
 

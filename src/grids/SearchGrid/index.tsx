@@ -18,6 +18,8 @@ class SearchGrid extends Component {
     state = {
         query: '',
         results: [],
+        currentResults: [],
+        currentStart: 0,
         analyses: {},
         isLoading: false 
     };
@@ -61,8 +63,12 @@ class SearchGrid extends Component {
             });
             const searchData : any = await fetchRequest(eventBody, this.baseURL + 'search')
                 .then((res: Response) => responseParse(res));
+            
+            const searchResults = JSON.parse(searchData.body);
             this.setState({
-                results: JSON.parse(searchData.body)
+                results: searchResults,
+                currentResults: searchResults.slice(0, 10),
+                currentStart: 0
             });  
             const analyzeData: any = await wait(2000)
                 .then(() => fetchRequest(eventBody, this.baseURL + 'analyze'))
@@ -77,11 +83,31 @@ class SearchGrid extends Component {
             console.log(err);
         }
     };
+
+    changeCurrentStart = (event: any, page: number) => {
+
+        event.preventDefault();
+
+        if(page - 1 !== this.state.currentStart) {
+            
+            this.setState({
+                isLoading: true
+            });
+            const newStart = (page - 1) * 10;
+            this.setState({
+                currentResults: this.state.results.slice(newStart, newStart + 10),
+                currentStart: newStart
+            });
+            this.setState({
+                isLoading: false
+            });
+        }
+    }
     
     //@ts-ignore
-    shouldComponentUpdate( nextProps, nextState: any) {
+    shouldComponentUpdate( _nextProps, nextState: any) {
         return  (nextState.isLoading !== this.state.isLoading) || 
-            (nextState.results !== this.state.results);
+            (nextState.currentResults !== this.state.currentResults);
     }
 
 
@@ -110,7 +136,7 @@ class SearchGrid extends Component {
                         />
                     </Grid>
                 </Grid>
-                <ContentGrid {...this.state} />
+                <ContentGrid {...this.state} onPageChange={this.changeCurrentStart.bind(this)} />
             </Container>
         );
     }
