@@ -36,9 +36,9 @@ class WordCloud extends Component<any> {
                     options = {{
                         scale: 'linear',
                         spiral: 'archimedean',
-                        fontSizes: [32,42],
+                        fontSizes: [36,48],
                         rotations: 5,
-                        rotationAngles: [-45,45]
+                        rotationAngles: [-30,30]
 
                     }}
                     words = {output}/>

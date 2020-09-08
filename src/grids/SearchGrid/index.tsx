@@ -70,7 +70,7 @@ class SearchGrid extends Component {
                 currentResults: searchResults.slice(0, 10),
                 currentStart: 0
             });  
-            const analyzeData: any = await wait(2000)
+            const analyzeData: any = await wait(5000)
                 .then(() => fetchRequest(eventBody, this.baseURL + 'analyze'))
                 .then((res: Response) => responseParse(res));
             this.setState({
